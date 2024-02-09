@@ -1,0 +1,12 @@
+<!-- Hotelchamp script -->
+(function (s, h, g) {
+    var o = "script", a, m; a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1; a.crossOrigin = "anonymous";a.src = g; a.setAttribute("data-id", h);
+    a.className = "hc-ws-loader-script"; m.parentNode.insertBefore(a, m);
+})(
+    document,
+    '1fc6ee57-24e0-4a3e-8db1-d79fe4efebe6',
+    '//ws.hotelchamp.com/pub/latest/hotel/hotel.js'
+);
+
+    

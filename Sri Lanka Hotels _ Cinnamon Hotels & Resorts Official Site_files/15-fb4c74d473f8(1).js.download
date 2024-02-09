@@ -1,0 +1,131 @@
+/**
+ *  DRS stands for Data Receiver Service
+ *  This tag must be place on every page of the site.
+ *  It will then load an image pixel which create the user profile
+ *  Depending on the URL's visited users must be taged in to different segments.
+ *  Advertiser Cinnamon
+ *  Only 8 hotels included.
+ *  - 17/05/2017: Modified for DBM
+ */
+if (window.location.href.toLowerCase().indexOf('cinnamondhonvelimaldives') == -1 && window.location.href.toLowerCase().indexOf('ellaidhoomaldivescinnamon') == -1 &&
+    window.location.href.toLowerCase().indexOf('mvmal30542') == -1 && window.location.href.toLowerCase().indexOf('mvmal30546') == -1) {
+
+    var DNdbmID = '8060930';
+    var DNsegment = 'visitor';
+    var DNCounter = 'counter';
+    var DNStep = 0;
+    var DNidp = 0;
+
+    if (typeof DNdbmID != 'undefined' && DNdbmID != null) {
+
+        var DNproduct = [];
+        DNproduct[DNidp++] = {id: 'cinnamonlodgehabarana', idbe: 'lkcol30563', segment: 'cinnamonlodgehabarana'};
+        DNproduct[DNidp++] = {id: 'cinnamoncitadelkandy', idbe: 'lkkan30562', segment: 'cinnamoncitadelkandy'};
+        DNproduct[DNidp++] = {id: 'cinnamonbeyberuwala', idbe: 'lkcol30565', segment: 'cinnamonbeyberuwala'};
+        DNproduct[DNidp++] = {id: 'hikkatranzcinnamon', idbe: 'lkcol30547', segment: 'hikkatranzcinnamon'};
+        DNproduct[DNidp++] = {id: 'trincoblucinnamon', idbe: 'lkcol30549', segment: 'trincoblucinnamon'};
+        DNproduct[DNidp++] = {id: 'cinnamonwildyala', idbe: 'lkcol30545', segment: 'cinnamonwildyala'};
+        DNproduct[DNidp++] = {id: 'cinnamonlodgehabarana', idbe: '71063', segment: 'cinnamonlodgehabarana'};
+        DNproduct[DNidp++] = {id: 'cinnamongrandcolombo', idbe: 'lkcol30569', segment: 'cinnamongrandcolombo'};
+        DNproduct[DNidp++] = {id: 'cinnamonlakesidecolombo', idbe: 'lkcol30568', segment: 'cinnamonlakesidecolombo'};
+        DNproduct[DNidp++] = {id: 'cinnamonredcolombo', idbe: 'lkcol30566', segment: 'cinnamonredcolombo'};
+        DNproduct[DNidp++] = {id: 'habaranavillagecinnamon', idbe: 'lkcol30548', segment: 'habaranavillagecinnamon'};
+        //DNproduct[DNidp++] = {id: 'cinnamondhonvelimaldives', idbe: 'mvmal30542', segment: 'cinnamondhonvelimaldives'};
+        //DNproduct[DNidp++] = {id: 'ellaidhoomaldivescinnamon', idbe: 'mvmal30546', segment: 'ellaidhoomaldivescinnamon'};
+
+        var DNStepList = [];
+        DNidp = 0;
+        DNStepList[DNidp++] = {idbe: 'results', segment: 1};
+        DNStepList[DNidp++] = {idbe: 'extras', segment: 2};
+        DNStepList[DNidp++] = {idbe: 'validate', segment: 3};
+
+        checkDNSegment();
+
+        var DNnodeObserver = document.getElementsByTagName('body')[0];
+        var DNMutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+        var DNobserver = new DNMutationObserver(function (event) {
+            checkDNSegment();
+        });
+
+        DNobserver.observe(DNnodeObserver, {
+            attributeFilter: ['class'],
+            characterData: false
+        });
+
+        function checkDNSegment() {
+            if (typeof DNdbmID != 'undefined' && DNdbmID != null) {
+                for (var i = 0; i < DNproduct.length; i++) {
+                    if (window.location.href.indexOf('reservations') != -1 || window.location.href.indexOf('book-secure') != -1) {
+                        DNStep = 1;
+                        if (window.location.href.indexOf(DNproduct[i].idbe) != -1) {
+                            DNsegment = 'intention_' + DNproduct[i].segment;
+                            break;
+                        } else {
+                            DNsegment = 'intention';
+                        }
+                    }
+
+                    if (window.location.href.indexOf(DNproduct[i].id) != -1) {
+                        DNsegment = 'hotel_' + DNproduct[i].segment;
+                        break;
+                    }
+                }
+                for (var i = 0; i < DNStepList.length; i++) {
+                    if (window.location.href.toLowerCase().indexOf('s=' + DNStepList[i].idbe) != -1) {
+                        DNStep = DNStepList[i].segment;
+                        break;
+                    }
+                }
+            }
+
+            if (typeof DNdebug != 'undefined' && DNdebug != null) {
+                console.log(DNsegment);
+            } else {
+                !(function () {
+                    if (typeof DNdbmID != 'undefined' && DNdbmID != null) {
+                        var DNActivityType;
+                        var DNUnique;
+                        switch (DNStep) {
+                            case 0:
+                                DNActivityType = 'visit0';
+                                DNUnique = '';
+                                break;
+                            default:
+                                DNActivityType = 'micro0';
+                                DNUnique = ';num=';
+                                break;
+                        }
+                        var axel = Math.random() + "";
+                        var a = axel * 10000000000000;
+                        var newIFrame = document.createElement('iframe');
+                        newIFrame.src = 'https://' + DNdbmID + '.fls.doubleclick.net/activityi;src=' + DNdbmID + ';type=' + DNActivityType + ';cat=' + DNActivityType + ';u1=' + DNsegment + ';u27=' + DNCounter + ';u28=' + DNStep + ';dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1' + DNUnique + a + '?';
+                        newIFrame.width = "0";
+                        newIFrame.frameBorder = "0";
+                        newIFrame.height = "0";
+                        newIFrame.style = "visibility: hidden; display: none; border: medium none;";
+                        var scriptNode = document.getElementsByTagName("body")[0];
+                        if (scriptNode) scriptNode.appendChild(newIFrame, scriptNode);
+                    }
+
+                    if (DNStep == DNStepList[DNStepList.length - 1].segment) {
+                        if (typeof DNdbmID != 'undefined' && DNdbmID != null) {
+                            DNActivityType = 'hot_m0';
+                            DNUnique = ';num=';
+                            var axel = Math.random() + "";
+                            var a = axel * 10000000000000;
+                            var newIFrame = document.createElement('iframe');
+                            newIFrame.src = 'https://' + DNdbmID + '.fls.doubleclick.net/activityi;src=' + DNdbmID + ';type=' + DNActivityType + ';cat=' + DNActivityType + ';dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1' + DNUnique + a + '?';
+                            newIFrame.width = "0";
+                            newIFrame.frameBorder = "0";
+                            newIFrame.height = "0";
+                            newIFrame.style = "visibility: hidden; display: none; border: medium none;";
+                            var scriptNode = document.getElementsByTagName("body")[0];
+                            if (scriptNode) scriptNode.appendChild(newIFrame, scriptNode);
+                        }
+                    }
+
+                })();
+            }
+        }
+    }
+}

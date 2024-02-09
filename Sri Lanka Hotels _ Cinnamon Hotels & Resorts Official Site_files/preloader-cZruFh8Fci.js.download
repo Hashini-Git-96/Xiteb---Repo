@@ -1,0 +1,38 @@
+// Updated: 2020-08-07
+(function() {
+    var fallbackHash = "cZruFh8Fci";
+    var data = [{"hotelName":"Cinnamon Lakeside Colombo","urlFragments":["cinnamonlakesidecolombo","property=lkcol30568"],"websiteHash":"oWvwdNWIo3"},{"hotelName":"Cinnamon Bey Beruwala","urlFragments":["cinnamonbeyberuwala","property=lkcol30565"],"websiteHash":"GVm4Nvup5m"},{"hotelName":"Ellaidhoo Maldives by Cinnamon","urlFragments":["ellaidhoomaldivescinnamon","property=mvmal30546"],"websiteHash":"ns2oziGFts"},{"hotelName":"Trinco Blu by Cinnamon","urlFragments":["trincoblucinnamon","property=lkcol30549"],"websiteHash":"TYDdO7xsP1"},{"hotelName":"Cinnamon Grand Colombo","urlFragments":["cinnamongrandcolombo","property=lkcol30569"],"websiteHash":"gF54sWdeKO"},{"hotelName":"Cinnamon Dhonveli Maldives","urlFragments":["cinnamondhonvelimaldives","property=mvmal30542"],"websiteHash":"najlTfru7S"},{"hotelName":"Cinnamon Citadel Kandy","urlFragments":["cinnamoncitadelkandy","property=lkkan30562"],"websiteHash":"wSiPtiNDuQ"},{"hotelName":"Cinnamon Red Colombo","urlFragments":["cinnamonredcolombo","property=lkcol30566"],"websiteHash":"wQ2kQC2xFh"},{"hotelName":"Hikka Tranz by Cinnamon","urlFragments":["https:\/\/www.cinnamonhotels.com\/hikkatranzcinnamon","property=lkcol30547"],"websiteHash":"l1DQudcjer"},{"hotelName":"Cinnamon Wild Yala","urlFragments":["cinnamonwildyala","property=lkcol30545"],"websiteHash":"tYbzaRICwd"},{"hotelName":"Cinnamon Lodge Habarana","urlFragments":["cinnamonlodgehabarana","property=lkcol30563"],"websiteHash":"ocqBDx1vLN"},{"hotelName":"Habarana Village by Cinnamon","urlFragments":["habaranavillagecinnamon","property=lkcol30548"],"websiteHash":"dWJyS8y3rY"},{"hotelName":"Cinnamon Hakuraa Huraa","urlFragments":["cinnamonhakuraahuraamaldives","property=mvmal30544"],"websiteHash":"T6cwdfeCkf"},{"hotelName":"Cinnamon Bentota Beach","urlFragments":["cinnamonbentotabeach","property=lkben30543"],"websiteHash":"zT6vb15qny"},{"hotelName":"Cinnamon Velifushi Maldives","urlFragments":["cinnamonvelifushimaldives","property=mvvaa00001"],"websiteHash":"6NXHoH7irQ"}];
+
+function retrieveHash() {
+        var url = window.location.href;
+        var hotel = fallbackHash;
+
+        for (i = 0; i < data.length; i++) {
+            data[i].urlFragments.forEach(function(urlFragment) {
+                if (url.indexOf(urlFragment) !== -1) {
+                    hotel = data[i].websiteHash;
+                }
+            });
+        }
+
+        return hotel;
+    }
+
+// document.addEventListener("DOMContentLoaded", function () {
+    var hash = retrieveHash();
+
+// Used to create shared cross-storage between different hotel pages
+    window["_hc_scope"] = {};
+    window["_hc_scope"]["forced_storage_hash"] = fallbackHash;
+
+// Creating the script and setting the src.
+    var script = document.createElement("script");
+    script.src = "https://cdn.hotelchamp.com/app/launcher/" + hash + ".js";
+
+// Set value to let widgetCode now we are using a preLoader.
+    if (sessionStorage) {
+        sessionStorage.setItem("hcPreLoader", true);
+        document.head.appendChild(script);
+    }
+// });
+})();

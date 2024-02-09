@@ -1,0 +1,1 @@
+if(console){var cookiedomainwarning='Error: The domain WWW.CINNAMONHOTELS.COM is not authorized to show the cookie banner for domain group ID 90415658-af7d-4bfb-a396-21be6647f127. Please add it to the domain group in the Cookiebot Manager to authorize the domain.';if(typeof console.warn === 'function'){console.warn(cookiedomainwarning)}else{console.log(cookiedomainwarning)}};
